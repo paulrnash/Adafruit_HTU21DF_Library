@@ -114,7 +114,8 @@ float Adafruit_HTU21DF::readHumidity(void) {
     Wire.endTransmission();
 
     /* Wait a bit for the conversion to complete. */
-    delay(50);
+    /* Max conversion time at 12 bits is 16ms, per datasheet. */
+    delay(20);
 
     /* Read the conversion results. */
     uint8_t count = Wire.requestFrom(HTU21DF_I2CADDR, 3);

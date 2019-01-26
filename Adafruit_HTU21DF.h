@@ -42,6 +42,13 @@
 /** Reset command. */
 #define HTU21DF_RESET           (0xFE)
 
+///////////////////////
+// Uncomment this if you want this library to track the values it reads.
+// Currently the code does nothing with these, so it wastes 8 bytes of dynamic
+// mem and 20 bytes of code space just to store the values that it never uses.
+//
+//#define HTU21DF_TRACK_LAST_VALS
+
 /**
  * Driver for the Adafruit HTU21DF breakout board.
  */
@@ -56,7 +63,9 @@ class Adafruit_HTU21DF {
 
     private:
         boolean readData(void);
+    #ifdef HTU21DF_TRACK_LAST_VALS
         float _last_humidity, _last_temp;
+    #endif // HTU21DF_TRACK_LAST_VALS
 };
 
 #endif /* _ADAFRUIT_HTU21DF_H */

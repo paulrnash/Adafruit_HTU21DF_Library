@@ -25,9 +25,11 @@
  */
 Adafruit_HTU21DF::Adafruit_HTU21DF()
 {
+#ifdef HTU21DF_TRACK_LAST_VALS
     /* Assign default values to internal tracking variables. */
     _last_humidity = 0.0f;
     _last_temp = 0.0f;
+#endif // HTU21DF_TRACK_LAST_VALS
 }
 
 /**
@@ -95,8 +97,10 @@ float Adafruit_HTU21DF::readTemperature(void)
     temp /= 65536.0f;
     temp -= 46.85f;
 
+#ifdef HTU21DF_TRACK_LAST_VALS
     /* Track the value internally in case we need to access it later. */
     _last_temp = temp;
+#endif // HTU21DF_TRACK_LAST_VALS
 
     return temp;
 }
@@ -138,8 +142,10 @@ float Adafruit_HTU21DF::readHumidity(void) {
     hum /= 65536.0f;
     hum -= 6.0f;
 
+#ifdef HTU21DF_TRACK_LAST_VALS
     /* Track the value internally in case we need to access it later. */
     _last_humidity = hum;
+#endif // HTU21DF_TRACK_LAST_VALS
 
     return hum;
 }
